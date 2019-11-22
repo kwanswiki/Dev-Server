@@ -1,7 +1,7 @@
 """
-AUTHOR: GODWIN KWAN
-DATE: 2019-11
-# UNICODE: UTF-8
+-*- AUTHOR: GODWIN KWAN -*-
+-*- CREATED: 2019-11 -*-
+-*- CODING: UTF-8 -*-
 """
 
 
@@ -9,6 +9,35 @@ import os
 import pandas
 
 
+# Attached Modules
+def filtered_files(dir_path: str):
+
+    # 筛选出指定目录下的特定类型文件
+
+    all_files = os.listdir(dir_path)
+    file_list = os.listdir(dir_path)  # 从所有文件中剔除非所选类型的文件
+
+    for i in all_files:
+        if (i.endswith('.xls')) or (i.endswith('.xlsx')):  # **筛选不同类的时候请更改该处**
+            continue
+        else:
+            file_list.remove(i)
+    return file_list
+
+
+def list_sort_keyword(item_list, sort_keyword: str):
+
+    # 把含特定关键词的某个元素调到列表的首个元素
+
+    for i in range(0, len(item_list)):
+        if sort_keyword in item_list[i]:
+            key_item = item_list.pop(i)
+            item_list.insert(0, key_item)
+            break  # 遇到首个item含关键词的，就把其移动到列表首位，然后就停止后面的查找了
+    return item_list
+
+
+# Main Module
 def id_match(files_path: str):
     extract_files = filtered_files(files_path)
     print('Files Found: ', len(extract_files))
