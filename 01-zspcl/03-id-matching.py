@@ -41,7 +41,6 @@ def list_sort_keyword(item_list, sort_keyword: str):
 
 # Local Modules
 def sheet_operation1(data_unit, data_database):
-
     # 零售数据匹配
 
     data_unit.columns = [
@@ -63,7 +62,6 @@ def sheet_operation1(data_unit, data_database):
 
 
 def sheet_operation2(data_unit, data_database):
-
     # 药店活动匹配
 
     data_unit.columns = [
