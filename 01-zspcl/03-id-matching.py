@@ -135,8 +135,7 @@ def id_match(files_path: str):
         excel_writer.book = excel_book
         excel_writer.sheets = dict((worksheet.title, worksheet) for worksheet in excel_book.worksheets)
         data_unit1.to_excel(excel_writer, sheet_name=sheet_name1, encoding='utf-8', index=False, header=True, startrow=2)
-        print('Done Sales No.', str(i))
         data_unit2.to_excel(excel_writer, sheet_name=sheet_name2, encoding='utf-8', index=False, header=True, startrow=2)
-        print('Done Stores No.', str(i))
+        print('Done No.', str(i))
         excel_writer.save()
         excel_writer.close()
