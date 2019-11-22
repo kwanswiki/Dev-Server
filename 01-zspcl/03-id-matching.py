@@ -55,9 +55,10 @@ def id_match(files_path: str):
     data_database['MatchID'] = data_database_date + '_' + data_database_time + '_' + data_database['药店名称'].str.strip()
     data_database.drop(['拜访日期', '拜访时间', '药店名称'], axis=1, inplace=True)
 
+    sheet_name = '拜访服务'
     for i in range(1, len(extract_files)):
         data_unit = pandas.DataFrame(pandas.read_excel(os.path.join(files_path, extract_files[i]),
-                                                       sheet_name='拜访服务', skiprows=2, usecols=list(range(18))))
+                                                       sheet_name=sheet_name, skiprows=2, usecols=list(range(18))))
 
         data_unit.columns = [
             '序号', '服务商属性', '服务商名称', '服务人员', '服务方式', '服务对象/类型', '拜访日期', '终端名称', '省',
@@ -76,9 +77,12 @@ def id_match(files_path: str):
 
         print(data_unit)
 
+        excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]))
         data_unit.to_excel(
-            os.path.join(files_path, extract_files[i]), encoding='utf-8', index=False, header=True, startrow=3
+            excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=3
         )
+        excel_writer.save()
+        excel_writer.close()
 
     # 匹配药店活动
     data_database = pandas.DataFrame(pandas.read_excel(os.path.join(files_path, extract_files[0]),
@@ -89,9 +93,10 @@ def id_match(files_path: str):
     data_database['MatchID'] = data_database['开始时间'].dt.strftime('%Y-%m-%d') + '_' + data_database['主题'].str.strip()
     data_database.drop(['主题', '开始时间'], axis=1, inplace=True)
 
+    sheet_name = '店员培训服务'
     for i in range(1, len(extract_files)):
         data_unit = pandas.DataFrame(pandas.read_excel(os.path.join(files_path, extract_files[i]),
-                                                       sheet_name='店员培训服务', skiprows=2, usecols=list(range(17))))
+                                                       sheet_name=sheet_name, skiprows=2, usecols=list(range(17))))
 
         data_unit.columns = [
             '序号', '服务商属性', '服务商名称', '服务人员', '服务对象/类型', '服务方式', '培训时间', '省', '培训地点',
@@ -118,6 +123,9 @@ def id_match(files_path: str):
 
         print(data_unit)
 
+        excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]))
         data_unit.to_excel(
-            os.path.join(files_path, extract_files[i]), encoding='utf-8', index=False, header=True, startrow=3
+            excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=3
         )
+        excel_writer.save()
+        excel_writer.close()
