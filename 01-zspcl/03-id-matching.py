@@ -77,7 +77,7 @@ def id_match(files_path: str):
         print(data_unit)
 
         data_unit.to_excel(
-            path.join(files_path, extract_files[i]), encoding='utf-8', index=False, header=True, startrow=3
+            os.path.join(files_path, extract_files[i]), encoding='utf-8', index=False, header=True, startrow=3
         )
 
     # 匹配药店活动
@@ -119,5 +119,5 @@ def id_match(files_path: str):
         print(data_unit)
 
         data_unit.to_excel(
-            path.join(files_path, extract_files[i]), encoding='utf-8', index=False, header=True, startrow=3
+            os.path.join(files_path, extract_files[i]), encoding='utf-8', index=False, header=True, startrow=3
         )
