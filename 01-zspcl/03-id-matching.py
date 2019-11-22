@@ -88,6 +88,8 @@ def id_match(files_path: str):
         excel_writer.save()
         excel_writer.close()
 
+        print('Done Sales.')
+
     # 匹配药店活动
     data_database = pandas.DataFrame(pandas.read_excel(os.path.join(files_path, extract_files[0]),
                                                        sheet_name='药店活动',
@@ -130,7 +132,7 @@ def id_match(files_path: str):
         excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]), engine='xlsxwriter')
         excel_book = openpyxl.load_workbook(excel_writer.path)
         excel_writer.book = excel_book
-        # excel_writer.sheets = dict((worksheet.title, worksheet) for worksheet in excel_book.worksheets)
+        excel_writer.sheets = dict((worksheet.title, worksheet) for worksheet in excel_book.worksheets)
         data_unit.to_excel(
             excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=3
         )
