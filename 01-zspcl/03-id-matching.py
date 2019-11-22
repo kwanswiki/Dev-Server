@@ -78,11 +78,10 @@ def id_match(files_path: str):
         print(data_unit)
 
         excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]))
+
         data_unit.to_excel(
             excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=3
         )
-        excel_writer.save()
-        excel_writer.close()
 
     # 匹配药店活动
     data_database = pandas.DataFrame(pandas.read_excel(os.path.join(files_path, extract_files[0]),
@@ -123,9 +122,9 @@ def id_match(files_path: str):
 
         print(data_unit)
 
-        excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]))
         data_unit.to_excel(
             excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=3
         )
+
         excel_writer.save()
         excel_writer.close()
