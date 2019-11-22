@@ -132,6 +132,7 @@ def id_match(files_path: str):
                                                         sheet_name=sheet_name2, skiprows=2, usecols=list(range(17))))
         data_unit2 = sheet_operation2(data_unit2, data_database2)
 
+        # pandas 0.25.0 的版本之后支持通过下列方式更新原来的Excel文档，而不是旧版本的通过新建文档来覆盖源文档导致其他为修改的Sheet丢失
         excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]), engine='openpyxl')
         excel_book = openpyxl.load_workbook(excel_writer.path)
         excel_writer.book = excel_book
