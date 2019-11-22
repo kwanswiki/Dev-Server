@@ -126,21 +126,19 @@ def id_match(files_path: str):
         data_unit1 = pandas.DataFrame(pandas.read_excel(os.path.join(files_path, extract_files[i]),
                                                         sheet_name=sheet_name1, skiprows=2, usecols=list(range(18))))
         data_unit1 = sheet_operation1(data_unit1, data_database1)
-        print(data_unit1)
 
         sheet_name2 = '店员培训服务'
         data_unit2 = pandas.DataFrame(pandas.read_excel(os.path.join(files_path, extract_files[i]),
                                                         sheet_name=sheet_name2, skiprows=2, usecols=list(range(17))))
         data_unit2 = sheet_operation2(data_unit2, data_database2)
-        print(data_unit2)
 
         excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]), engine='openpyxl')
         excel_book = openpyxl.load_workbook(excel_writer.path)
         excel_writer.book = excel_book
         excel_writer.sheets = dict((worksheet.title, worksheet) for worksheet in excel_book.worksheets)
         data_unit1.to_excel(excel_writer, sheet_name=sheet_name1, encoding='utf-8', index=False, header=True, startrow=2)
-        print('Done Sales.')
+        print('Done Sales No.', str(i))
         data_unit2.to_excel(excel_writer, sheet_name=sheet_name2, encoding='utf-8', index=False, header=True, startrow=2)
-        print('Done Stores.')
+        print('Done Stores No.', str(i))
         excel_writer.save()
         excel_writer.close()
