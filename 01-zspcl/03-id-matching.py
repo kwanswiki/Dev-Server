@@ -76,6 +76,10 @@ def id_match(files_path: str):
 
         print(data_unit)
 
+        data_unit.to_excel(
+            path.join(files_path, extract_files[i]), encoding='utf-8', index=False, header=True, startrow=3
+        )
+
     # 匹配药店活动
     data_database = pandas.DataFrame(pandas.read_excel(os.path.join(files_path, extract_files[0]),
                                                        sheet_name='药店活动',
@@ -111,4 +115,9 @@ def id_match(files_path: str):
                     data_unit.iloc[j, 18] = data_database.iloc[k, 1]  # 也可以直接把需要匹配的值直接赋给目标列上，就不用了下面的`merge()`操作了
 
         data_unit = pandas.merge(data_unit, data_database, on='MatchID', how='left')
+
         print(data_unit)
+
+        data_unit.to_excel(
+            path.join(files_path, extract_files[i]), encoding='utf-8', index=False, header=True, startrow=3
+        )
