@@ -83,7 +83,7 @@ def id_match(files_path: str):
         excel_writer.book = excel_book
         excel_writer.sheets = dict((worksheet.title, worksheet) for worksheet in excel_book.worksheets)
         data_unit.to_excel(
-            excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=3
+            excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=2
         )
         excel_writer.save()
         excel_writer.close()
@@ -127,6 +127,10 @@ def id_match(files_path: str):
 
         data_unit = pandas.merge(data_unit, data_database, on='MatchID', how='left')
 
+        data_unit.drop(['服务编码', 'MatchID_1', 'MatchID'], axis=1, inplace=True)  # 只删除列就用`.drop()`，如果要移动列就用`.pop()`再配合`insert()`
+        matched_col = data_unit.pop('ID')
+        data_unit.insert(15, '服务编码', matched_col)
+
         print(data_unit)
 
         excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]), engine='openpyxl')
@@ -134,7 +138,9 @@ def id_match(files_path: str):
         excel_writer.book = excel_book
         excel_writer.sheets = dict((worksheet.title, worksheet) for worksheet in excel_book.worksheets)
         data_unit.to_excel(
-            excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=3
+            excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=2
         )
         excel_writer.save()
         excel_writer.close()
+
+        print('Done Stores.')
