@@ -81,7 +81,6 @@ def sheet_operation2(data_unit, data_database):
             - 具体参考[该文章](https://blog.csdn.net/qq_37699336/article/details/84981687)
             '''
             regex_pattern = data_unit['MatchID_1'].iloc[j] + '_.*?' + str(data_unit['受训单位'].iloc[j]).strip() + '.*?'
-            print(regex_pattern)
             if re.search(regex_pattern, data_database['MatchID'].iloc[k]):
                 data_unit.iloc[j, 18] = data_database.iloc[k, 1]  # 也可以直接把需要匹配的值直接赋给目标列上，就不用了下面的`merge()`操作了
 
