@@ -78,8 +78,7 @@ def id_match(files_path: str):
 
         print(data_unit)
 
-        excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]))
-        excel_writer.book = openpyxl.load_workbook(excel_writer.path)
+        excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]), mode='a')
         data_unit.to_excel(
             excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=3
         )
@@ -125,8 +124,7 @@ def id_match(files_path: str):
 
         print(data_unit)
 
-        excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]))
-        excel_writer.book = openpyxl.load_workbook(excel_writer.path)
+        excel_writer = pandas.ExcelWriter(os.path.join(files_path, extract_files[i]), mode='a')
         data_unit.to_excel(
             excel_writer, sheet_name=sheet_name, encoding='utf-8', index=False, header=True, startrow=3
         )
