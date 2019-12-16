@@ -67,11 +67,7 @@ def sheet_operation2(data_unit, data_database):
 
     for j in range(0, data_unit.shape[0] - 1):
         for k in range(0, data_database.shape[0]):
-            '''
-            正则匹配：
-            - `.`是匹配除换行符`\n`外的任意字符，`*`表示匹配前一个字符0次或无限次，+或*后跟？表示非贪婪匹配，即尽可能少的匹配，如*?重复任意次，但尽可能少重复；
-            - 具体参考[该文章](https://blog.csdn.net/qq_37699336/article/details/84981687)
-            '''
+
             regex_pattern = data_unit['MatchID_1'].iloc[j] + '_.*?' + str(data_unit['受训单位'].iloc[j]).strip() + '.*?'
             if re.search(regex_pattern, data_database['MatchID'].iloc[k]):
                 data_unit.iloc[j, 18] = data_database.iloc[k, 1]
