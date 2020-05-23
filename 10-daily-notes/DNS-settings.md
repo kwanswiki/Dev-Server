@@ -2,6 +2,21 @@
 
 [Public DNS](https://www.zhihu.com/question/32229915?sort=created)
 
+## BATCH PING DNS IP
+
+```BATCH
+@echo off&setlocal ENABLEDELAYEDEXPANSION
+title BATCH PING IP LIST
+echo.
+for /f %%i in (C:\ip-ping-list.txt) do (
+	ping -n 2 %%i | find "TTL"  >>C:\batch-ping-result.txt
+)
+
+::注意 `find` 的关键字为英文，因此不用担心编码问题；若查找的文字为中文，如查找 `回复` ，那么必须记得把.bat批处理保存为ANSI的编码，否则由于乱码无法匹配关键字
+```
+
+---
+
 ## 阿里
 
 ```
